@@ -1,0 +1,80 @@
+
+.events-contents
+  - if flash.now[:success] && flash.now[:notice]
+    .alert-success
+      = flash.now[:success]
+      = flash.now[:notice]
+  h1.mt-3.mb-3=@event.name
+  .row
+    .col-8
+      .card.mb-2
+        -if @event.image.attached?
+          = image_tag @event.image, width: 600, height: 400, class: "card-img-top"
+      .card.mb-2
+        h5.card-header イベント内容
+        .card-body
+          p.card-text= @event.name
+      .card.mb-2
+        h5.card-header イベントタイプ
+        .card-body
+          p.card-text= @event.type.name
+      .card.mb-2
+        h5.card-header 開催場所
+        .card-body
+          p.card-text= @event.place
+      .card.mb-2
+        h5.card-header 開催時間
+        .card-body
+          p.card-text="#{l(@event.date_open, format: :long)} - #{l(@event.date_close, format: :long)}"
+      .card.mb-2
+        h5.card-header 参加費
+        .card-body
+          p.card-text="#{@event.price}円"
+      .card.mb-2
+        h5.card-header 参加費詳細
+        .card-body
+          p.card-text= @event.price_detail
+      .card.mb-2
+        h5.card-header メモ
+        .card-body
+          p.card-text= @event.memo
+
+    .col-4
+      - if @event.user_id == current_user.id
+        =link_to "イベントを編集する", edit_event_path(@event), class: "btn btn-info btn-lg btn-block"
+        =link_to "イベントを削除する", event_path(@event), class: "btn btn-danger btn-lg btn-block", method: :delete, data: { confirm: "本当に削除しますか？" }
+      - if logged_in?
+        button.btn.btn-primary.btn-lg.btn-block{ data-toggle="modal" data-target="#createTicket" }
+          | 参加する
+        .modal.fade#createTicket
+          .modal-dialog 
+            .modal-content
+              .modal-header
+                h4.comment-title  参加コメント
+                button.close{ type="button", data-dismiss="modal" }
+              = form_with(model:@event.tickets.build, url:event_tickets_path(@event)) do |f|
+                .modal-body
+                  #createTicketErrors
+                  = f.text_field :comment, class: "form-control"
+                .modal-footer
+                  button.btn.btn-default type="button" data-dismiss="modal" 
+                  | キャンセル
+                  = f.button "送信", class: "btn btn-primary"
+      - else 
+        = link_to "参加する", new_event_ticket_path(@event), class: "btn btn-primary btn-lg btn-block"
+          
+      - if @ticket
+        = link_to "参加をキャンセルする", event_ticket_path(@event, @ticket), method: :delete, class: "btn btn-warning btn-lg btn-block", data: { confirm: "本当にキャンセルしますか？" }
+
+      hr
+      .card.mb-2 
+        h5.card-header 参加者
+        ul.list-group.list-group.list-group-flush 
+          - @tickets.each do |ticket|
+            li.list-group-item 
+              - if ticket.user
+                = link_to(event_tickets_path(ticket.user)) do
+                  = "@#{ticket.user.nickname}"
+                = ticket.comment
+              - else
+                退会したユーザーです

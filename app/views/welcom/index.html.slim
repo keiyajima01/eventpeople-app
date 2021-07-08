@@ -1,0 +1,15 @@
+
+.events-contents
+  - if flash.now[:alert]
+    .alert-danger
+      = flash.now[:alert]
+      
+  h1 イベント一覧
+
+  ul.list-group
+    - @events.each do |event|
+      / -if @days_ago < event.created_at
+
+      = link_to(event, class: "list-group-item list-group-item-action") do
+        h5.list-group-item-heading= event.name
+        p.mb-1="#{l(event.date_open, format: :long)} - #{l(event.date_close, format: :long)}"

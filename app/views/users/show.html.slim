@@ -1,0 +1,7 @@
+.wrapper-default
+  .user_info
+  - if flash.now[:success]
+    .alert-success
+      = flash.now[:success]
+  h1
+    = @user.nickname

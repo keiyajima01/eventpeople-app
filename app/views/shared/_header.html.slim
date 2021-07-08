@@ -1,0 +1,20 @@
+header
+  div.header-logo 
+    = link_to image_tag("LogoEventPeople-S.png", class:"header-logo"), "/"
+  div.header-list
+    ul
+      - if logged_in?
+        li.list
+          = link_to "イベント登録", new_event_path
+        li.list
+          = link_to "退会", new_retirement_path
+        li.list
+          = link_to "ログアウト", logout_path, method: :delete
+      - else
+        li.list
+          = link_to "会員登録", signup_path
+        li.list
+          = link_to "ログイン", login_path
+        
+        
+          

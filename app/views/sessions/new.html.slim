@@ -1,0 +1,35 @@
+
+div.login-contents
+  = form_for(:session, url: login_path, class: 'registration-main') do |f|
+    div.form-wrap
+      div.form-header
+        h1.form-header-text
+        ログイン
+
+    - if flash[:danger]
+      .alert-danger
+        = flash[:danger]
+
+
+    div.form-group
+      div.form-text-wrap
+        label.form-text メールアドレス
+
+      = f.email_field :mail, class:"input-default", id:"email"
+    
+    div.form-group
+      div.form-text-wrap
+        label.form-text パスワード
+
+      = f.password_field :password, class:"input-default"
+
+      = f.label :remember_me, class: "checkbox inline" do
+        = f.check_box :remember_me
+        span ログインを記憶する
+
+    div.login-btn
+      = f.submit "ログイン" ,class:"submit-btn"
+
+      p
+        | New user? 
+        = link_to "新規登録", signup_path

@@ -1,0 +1,18 @@
+select {
+  height: 38px;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s;
+}
+
+.event-new-contents {
+  margin-top: 100px;
+}
+
+.event-new-contents h1 {
+  text-align: center;
+}
+
+.event-btn {
+  text-align: center;
+}
