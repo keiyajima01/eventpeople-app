@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2021_07_05_123325) do
     t.datetime "deleted_at"
     t.string "password_digest", limit: 255
     t.bigint "event_id"
-    t.string "remember_digest", limit: 255
+    t.string "remember_digest"
     t.index ["event_id"], name: "index_users_on_event_id"
   end
 

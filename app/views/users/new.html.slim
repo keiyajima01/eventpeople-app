@@ -11,22 +11,22 @@
     div.form-text-wrap
       label.form-text ニックネーム
 
-    = f.text_area :nickname, class:"input-default", maxlength:"40", autofocus: true
+    = f.text_area :nickname, class:"input-default", maxlength:"40", autofocus: true, placeholder:"yamada"
 
   div.form-group
     div.form-text-wrap
       label.form-text お名前(姓)
-    = f.text_area :last_name, class:"input-default"
+    = f.text_area :last_name, class:"input-default", placeholder:"例）山田"
 
   div.form-group
     div.form-text-wrap
       label.form-text お名前(名)
-    = f.text_area :first_name, class:"input-default" 
+    = f.text_area :first_name, class:"input-default" , placeholder:"例）太郎"
 
   div.form-group
     div.form-text-wrap
       label.form-text 住所
-    = f.text_area :address, class:"input-default", placeholder:"東京都渋谷区渋谷1-1-1"
+    = f.text_area :address, class:"input-default", placeholder:"例）東京都渋谷区渋谷1-1-1"
   
   div.form-group
     div.form-text-wrap
@@ -38,13 +38,13 @@
     div.form-text-wrap
       label.form-text パスワード
 
-    = f.password_field :password, class:"input-default", id:"password", placeholder:"6文字以上の半角英数字"
+    = f.password_field :password, class:"input-default", id:"password", placeholder:"6文字以上の半角英数字を入力して下さい"
  
   div.form-group
     div.form-text-wrap
       label.form-text パスワード(確認用)
 
-    = f.password_field :password_confirmation, class:"input-default", id:"password-confirmation", placeholder:"同じパスワードを入力して下さい"
+    = f.password_field :password_confirmation, class:"input-default", id:"password-confirmation", placeholder:"パスワードと同じものを入力して下さい"
   
   div.form-group
     div.form-text-wrap

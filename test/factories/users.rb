@@ -9,5 +9,6 @@ FactoryBot.define do
     birthday          {Faker::Date.between(from: '1930-01-01', to: '2020-12-31')}
     address           {Gimei.address.kanji + "1 - 1 - 1"}
     memo              {"a" * 200}
+    event_id          {"1"}
   end
 end
