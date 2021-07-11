@@ -1,8 +1,8 @@
 FactoryBot.define do
-  setup
   
-
   factory :event do
+    user
+    user_id {user.id}
     sequence(:name) {|i| "イベント名#{i}" }
     type_id { rand(1..3) }
     date_open { rand(1..30).days.from_now }

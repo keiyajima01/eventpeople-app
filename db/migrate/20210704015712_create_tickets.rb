@@ -8,7 +8,7 @@ class CreateTickets < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    #ユーザーが重複して参加することが内容ユニークインデックスを追加(通常のindexは削除)
+    #ユーザーが重複して参加することがないようユニークインデックスを追加(通常のindexは削除)
     add_index :tickets, %i[event_id user_id], unique: true
   end
 end
