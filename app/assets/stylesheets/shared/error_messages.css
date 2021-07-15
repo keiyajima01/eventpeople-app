@@ -1,13 +1,13 @@
 .error-alert {
   display: flex;
   justify-content: center;
-  display: block;
-  margin-bottom: 5vh;
+  /* display: block; */
+  margin-bottom: 3vh;
 }
 
 .error-message {
-  padding-right: 10px;
-  font-size: 1.3vw;
+  padding-right: 20px;
+  font-size: 18px;
   /* list-style: circle; */
   color: rgb(182, 48, 0);
 }
