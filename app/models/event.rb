@@ -16,6 +16,7 @@ class Event < ApplicationRecord
     validates :pref_id
     validates :place, length: { maximum: 64 }
   end
+  validates :price, numericality: { message: "は数値で入力してください" }
   validates :price_detail, length: { maximum: 64 }
   validates :memo, length: { maximum: 200 }
   validates :image,

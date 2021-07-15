@@ -14,9 +14,10 @@ ja:
         first_name_kana: 名（カナ）
         birthday: 誕生日
       event:
-        name: 名前
+        name: イベント名
         type_id: イベント内容
         place: 場所
+        price: 参加費
         date_open: 開始時間
         date_close: 終了時間
         pref_id: 都道府県

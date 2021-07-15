@@ -2,18 +2,21 @@
 
 div.events-contents
   h1.mt-5.text-center イベント情報編集
-  = form_with model: @event, url: events_path, class: 'form-forizontal' do |f|
-    #errors
+
+  = form_with model: @event, url: events_path(@event), method: :put, class: 'form-forizontal' do |f|
+    = render 'shared/error_messages', model: f.object
+
     div.form-group
       = f.label :name, "イベント名"
       = f.text_field :name, class: "form-control"
+        = @event.name
     div.form-group
       = f.label :type_id, "イベント選択"
       = f.select(:type_id, [['テニス', 1], ['ドライブ', 2], ['飲み会', 3]], class: "select-default")
     div.form-group
       = f.label :date_open, "開始時間"
       div.select-item
-        = f.datetime_select(:date_open, start_year: now.year, end_year: now.year + 1)
+        = f.datetime_select(:date_open, use_month_numbers:true, start_year: now.year, end_year: now.year + 1)
     div.form-group
       = f.label :date_close, "終了時間"
       div.select-item
@@ -23,28 +26,33 @@ div.events-contents
       = f.collection_select(:pref_id, Pref.all, :id, :name, {}, class: "select-default")
     div.form-group
       = f.label :place, "開催場所"
-      = f.text_field :place, class: "form-control", placeholder: "例）夏の雲テニスコート"
+      = f.text_field :place, class: "form-control"
+        = @event.place
     div.form-group
       = f.label :price, "参加費"
-      = f.text_field :price, class: "form-control", placeholder: "例）3000（数字のみ入力してください）"
+      = f.text_field :price, class: "form-control"
+        = @event.price
     div.form-group
       = f.label :price_detail, "参加費詳細"
-      = f.text_field :price_detail, class: "form-control", placeholder: "例）詳細金額：コート代 6000円"
+      = f.text_field :price_detail, class: "form-control"
+        = @event.price_detail
     div.form-group
       = f.label :needed_skill, '必須スキル', {class: "select-default"}
       = f.collection_select(:needed_skill, Skill.all, :id, :name, {}, class:"select-default", id:"skill-select")
     div.form-group
       = f.label :memo, "メモ"
       = f.text_area :memo, class: "form-control", row: 20
+        = @event.memo
     div.form-group
       = f.label :image, "画像"
       - if @event.image.attached? && @event.image.blob&.persisted?  #activestrageのvalidate 画像がアップロードされたか判定
         = image_tag(@event.image.variant(resize_to_fit: [200, 200]), class: "img-thumbnail d-block mb-3")
-      = f.file_field :image, class: "form-control-file"
-    -if @event.image.attached? && @event.image.blob&.persisted?
-      .checkbox
-        label
-        = f.check_box :remove_image
-        画像を削除する      
+        = f.file_field :image, class: "form-control-file"
+      -if @event.image.attached? && @event.image.blob&.persisted?
+        div.form-group
+          .checkbox
+            label
+            = f.check_box :remove_image
+            | 画像を削除する      
     div.event-btn
-      = f.submit class: "submit-btn"
+      = f.submit "更新する", class: "submit-btn"

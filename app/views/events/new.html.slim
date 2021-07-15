@@ -2,8 +2,10 @@
 
 div.events-contents
   h1.mt-5.text-center イベント作成
+
   = form_with model: @event, url: events_path, class: 'form-forizontal', local: true do |f|
-    #errors
+    = render 'shared/error_messages', model: f.object
+    
     div.form-group
       = f.label :name, "イベント名"
       = f.text_field :name, class: "form-control"
