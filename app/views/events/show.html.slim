@@ -1,6 +1,6 @@
 
 .events-contents
-  - if flash.now[:success] && flash.now[:notice]
+  - if flash.now[:success] || flash.now[:notice]
     .alert-success
       = flash.now[:success]
       = flash.now[:notice]
