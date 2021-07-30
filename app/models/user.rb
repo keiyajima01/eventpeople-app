@@ -58,6 +58,6 @@ class User < ApplicationRecord
       errors[:base] << "見終了の参加イベントが存在します。"
     end
 
-    throw(:abort) unless errors.empty?
+    throw(:abort) unless errors.empty?  #errorsがなければ処理を終了
   end
 end
